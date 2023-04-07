@@ -5,9 +5,9 @@ import Footer from './components/footer';
 import products from './DB/product.json';
 
 function App() {
-
   const [category, setCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   function filterProduct(value) {
     setCategory(value);
@@ -37,18 +37,25 @@ function App() {
     setCategory('all');
   }, []);
 
-  const filteredProducts = products.filter((product) => {
-    if (!searchTerm) return true;
-    const regex = new RegExp(searchTerm, 'gi');
-    return product.productName.match(regex) || product.description.match(regex);
-  });
+  const filteredProducts = products
+    .filter((product) => {
+      if (!searchTerm) return true;
+      const regex = new RegExp(searchTerm, 'gi');
+      return product.productName.match(regex) || product.description.match(regex);
+    })
+    .sort((a, b) => {
+      const nameA = a.productName.toUpperCase();
+      const nameB = b.productName.toUpperCase();
+      if (sortOrder === 'asc') {
+        return nameA < nameB ? -1 : 1;
+      } else {
+        return nameA > nameB ? -1 : 1;
+      }
+    });
 
   return (
     <>
-      <Header
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSortOrder={setSortOrder} sortOrder={sortOrder} />
       <Card
         filterProduct={filterProduct}
         filteredProducts={filteredProducts}
