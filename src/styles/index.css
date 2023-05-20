@@ -5,6 +5,8 @@
 @import 'footer.css';
 @import 'backToTop.css';
 @import 'commonpage.css';
+@import 'pagination.css';
+
 
 /* ===============================1560 media query */
 @media screen and (max-width: 1560px) {
