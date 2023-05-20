@@ -3,6 +3,7 @@ import Header from './header';
 import { ToolContext } from '../App';
 
 const Card = ({ length }) => {
+  
   const {
     filteredProducts,
     category,
@@ -12,6 +13,7 @@ const Card = ({ length }) => {
   } = useContext(ToolContext);
 
   const [currentPage, setCurrentPage] = useState(1);
+  
   const cardsPerPage = 20;
 
   // Calculate the index of the first and last card on the current page
